@@ -8,13 +8,20 @@
     android:orientation="vertical"
     android:background="@drawable/welcome">
 
-    <Button
+<!--    普通按钮无法改变背景颜色-->
+<!--    <Button-->
+<!--        android:id="@+id/btn_jump"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="right"-->
+<!--        android:textSize="10sp"-->
+<!--        android:text="点击跳过"/>-->
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_jump"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:textSize="10sp"
-<!--        style="@style/btn"-->
         android:text="点击跳过"/>
 
 </LinearLayout>
