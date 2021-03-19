@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="btn" parent="Theme.AppCompat">
+        <!-- 点击颜色 -->
+        <item name="colorControlHighlight">#2F38BE</item>
+        <!-- 背景颜色 -->
+        <item name="colorButtonNormal">#CDC0C0</item>
+    </style>
+</resources>
