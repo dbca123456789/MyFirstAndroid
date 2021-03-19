@@ -85,7 +85,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 if (userIsLogin){
                     intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 }else {
-                    intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                    intent = new Intent(WelcomeActivity.this, LoginOrRegisterActivity.class);
                 }
                 startActivity(intent);
                 finish();

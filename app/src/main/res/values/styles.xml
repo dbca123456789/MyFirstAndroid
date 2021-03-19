@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="btn" parent="Theme.AppCompat">
-        <!-- 点击颜色 -->
-        <item name="colorControlHighlight">#2F38BE</item>
-        <!-- 背景颜色 -->
-        <item name="colorButtonNormal">#CDC0C0</item>
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#ffffff</item>
+        <item name="colorControlActivated">@android:color/holo_orange_dark</item>
     </style>
 </resources>
