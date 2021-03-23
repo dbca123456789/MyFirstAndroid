@@ -9,8 +9,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -54,11 +57,45 @@ public class RegisterActivity extends AppCompatActivity {
 
         submit = findViewById(R.id.submit_info);
         uploadHead = findViewById(R.id.upload_head);
+
         username = findViewById(R.id.register_username);
         password = findViewById(R.id.register_password);
         repassword = findViewById(R.id.register_repassword);
 
         checkRules = findViewById(R.id.check_rules);
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                String username_str = username.getText().toString();
+                String password_str = password.getText().toString();
+                String repassword_str = repassword.getText().toString();
+
+                if (checkRules.isChecked()){
+                    if (password_str.equals(repassword_str)){
+                        Cursor cursor = db.rawQuery("select * from user where name=?", new String[]{username_str});
+                        if (cursor.getCount()>0){
+                            Toast.makeText(RegisterActivity.this, "该用户名已存在，请重新输入", Toast.LENGTH_SHORT).show();
+                        }else {
+                            ContentValues values = new ContentValues();
+                            values.put("name", username_str);
+                            values.put("password", password_str);
+                            db.insert("User", null, values);
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            finish();
+                        }
+                        cursor.close();
+                    }else {
+                        Toast.makeText(RegisterActivity.this, "两次密码不一致,请重新输入", Toast.LENGTH_SHORT).show();
+                    }
+                    db.close();
+                } else {
+                      Toast.makeText(RegisterActivity.this, "请勾选同意使用条款", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         uploadHead.setOnClickListener(new View.OnClickListener() {
             @Override

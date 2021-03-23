@@ -3,17 +3,14 @@ package com.example.myfirstandroid.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.myfirstandroid.Activity.LoginActivity;
+
 public class SharedPreUtil {
 
     private static final String FILE_NAME = "user_login";
 
     public static final String LOGIN_DATA = "loginData";
     public static final String IS_LOGIN = "isLogin";
-
-
-
-
-
 
 
 
@@ -45,5 +42,32 @@ public class SharedPreUtil {
                 return null;
         }
 
+    }
+
+    public static void setParam(Context context, String key, Object defaultObject) {
+        String type = defaultObject.getClass().getSimpleName();
+        SharedPreferences preferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        if ("String".equals(type)) {
+            editor.putString(key, (String) defaultObject);
+        } else if ("Integer".equals(type)) {
+            editor.putInt(key, (Integer) defaultObject);
+        } else if ("Boolean".equals(type)) {
+            editor.putBoolean(key, (Boolean) defaultObject);
+        } else if ("Float".equals(type)) {
+            editor.putFloat(key, (Float) defaultObject);
+        } else if ("Long".equals(type)) {
+            editor.putLong(key, (Long) defaultObject);
+        }
+
+        editor.apply();
+    }
+
+    public static void removeParam(Context context, String key){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(key);
+        editor.clear();
     }
 }
