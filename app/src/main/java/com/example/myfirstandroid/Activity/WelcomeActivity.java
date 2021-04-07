@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -59,7 +60,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
         }
     });
 
@@ -73,6 +73,8 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         thread.start();
+
+//        SharedPreUtil.setParam(WelcomeActivity.this, SharedPreUtil.IS_LOGIN, false);
 
         Button jumpButton = findViewById(R.id.btn_jump);
         jumpButton.setOnClickListener(new View.OnClickListener() {

@@ -4,4 +4,7 @@
         <item name="colorControlNormal">#ffffff</item>
         <item name="colorControlActivated">@android:color/holo_orange_dark</item>
     </style>
+    <style name="TableLayoutIcon" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
 </resources>

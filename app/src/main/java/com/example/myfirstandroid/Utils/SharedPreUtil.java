@@ -44,21 +44,21 @@ public class SharedPreUtil {
 
     }
 
-    public static void setParam(Context context, String key, Object defaultObject) {
-        String type = defaultObject.getClass().getSimpleName();
+    public static void setParam(Context context, String key, Object object) {
+        String type = object.getClass().getSimpleName();
         SharedPreferences preferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
         if ("String".equals(type)) {
-            editor.putString(key, (String) defaultObject);
+            editor.putString(key, (String) object);
         } else if ("Integer".equals(type)) {
-            editor.putInt(key, (Integer) defaultObject);
+            editor.putInt(key, (Integer) object);
         } else if ("Boolean".equals(type)) {
-            editor.putBoolean(key, (Boolean) defaultObject);
+            editor.putBoolean(key, (Boolean) object);
         } else if ("Float".equals(type)) {
-            editor.putFloat(key, (Float) defaultObject);
+            editor.putFloat(key, (Float) object);
         } else if ("Long".equals(type)) {
-            editor.putLong(key, (Long) defaultObject);
+            editor.putLong(key, (Long) object);
         }
 
         editor.apply();

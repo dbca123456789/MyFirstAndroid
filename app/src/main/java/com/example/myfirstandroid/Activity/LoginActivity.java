@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        dbHelper = new MyDatabaseHelper(this, "UserDB.db", null, 1);
+        dbHelper = new MyDatabaseHelper(this, "UserDB.db", null, 2);
 
         loginHead = findViewById(R.id.login_head);
         login = findViewById(R.id.check_user);
@@ -49,26 +49,28 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.login_password);
 
         String path = getCacheDir().getPath();
-        String fileName = "user_head";
-        File file = new File(path, fileName);
-        if (file.exists()){
-            try {
-                Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
-                Bitmap round = AlbumUtil.toRoundBitmap(bitmap);
-                loginHead.setImageBitmap(round);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }else {
-            loginHead.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.head));
-        }
+
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SQLiteDatabase db = dbHelper.getReadableDatabase();
+
                 String username_str = username.getText().toString();
                 String password_str = password.getText().toString();
+
+                String fileName = username_str;
+                File file = new File(path, fileName);
+                if (file.exists()){
+                    try {
+                        Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+                        Bitmap round = AlbumUtil.toRoundBitmap(bitmap);
+                        loginHead.setImageBitmap(round);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
                 Cursor cursor = db.rawQuery("select * from user where name=?",new String[]{username_str});
                 if (cursor.getCount()==0){
                     Toast.makeText(LoginActivity.this, "用户名不存在", Toast.LENGTH_SHORT);

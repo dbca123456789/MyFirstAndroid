@@ -48,12 +48,16 @@ public class RegisterActivity extends AppCompatActivity {
     private static final int CHOOSE_PHOTO = 1;
     private static final String TAG = "RegisterActivity";
 
+    private Bitmap pic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        dbHelper = new MyDatabaseHelper(this, "UserDB.db", null, 1);
+
+
+        dbHelper = new MyDatabaseHelper(this, "UserDB.db", null, 2);
 
         submit = findViewById(R.id.submit_info);
         uploadHead = findViewById(R.id.upload_head);
@@ -83,6 +87,14 @@ public class RegisterActivity extends AppCompatActivity {
                             values.put("name", username_str);
                             values.put("password", password_str);
                             db.insert("User", null, values);
+                            try {
+                                String path = getCacheDir().getPath();
+                                File file = new File(path, username_str);
+                                Log.i(TAG, "file路径"+file.toString());
+                                pic.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file));
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
                             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                             finish();
                         }
@@ -174,16 +186,8 @@ public class RegisterActivity extends AppCompatActivity {
     private void setHead(String imagePath) {
         if (imagePath != null){
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            Bitmap round = AlbumUtil.toRoundBitmap(bitmap);
-            try {
-                String path = getCacheDir().getPath();
-                File file = new File(path, "user_head");
-                Log.i(TAG, "file路径"+file.toString());
-                round.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            uploadHead.setImageBitmap(round);
+            pic = AlbumUtil.toRoundBitmap(bitmap);
+            uploadHead.setImageBitmap(pic);
         }else {
             Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
         }
