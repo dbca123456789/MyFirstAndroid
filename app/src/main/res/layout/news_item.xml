@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  android:descendantFocusability是viewGroup和其子控件焦点相关的属性
+beforeDescendants：viewgroup会优先其子类控件而获取到焦点
+
+afterDescendants：viewgroup只有当其子类控件不需要获取焦点时才获取焦点
+
+blocksDescendants：viewgroup会覆盖子类控件而直接获得焦点
+
+有了这个属性在recyclerview、listView等item中有ImageButton，Button，CheckBox等子控件的时候
+就可以很方便的控制是整个item获取焦点响应点击事件  还是  item中的这些子VIew获取焦点响应事件了-->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/news_item_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:layout_margin="8dp"
+            android:text="标题"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+        <ImageView
+            android:id="@+id/news_item_img"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"/>
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="19dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/news_item_author"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:layout_marginLeft="10dp"
+            android:text="中国新闻网"/>
+
+        <TextView
+            android:id="@+id/news_item_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:text="2018-8-22"/>
+
+        <ImageView
+            android:id="@+id/delete_item"
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:src="@drawable/delete"/>
+
+    </LinearLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey"/>
+
+
+</LinearLayout>
